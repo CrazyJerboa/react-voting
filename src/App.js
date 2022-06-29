@@ -1,9 +1,22 @@
 import './App.scss';
+import {addQuestions} from "./store/slices/main";
+import {useDispatch, useSelector} from "react-redux";
 
 const App = () => {
+    const dispatch = useDispatch();
+    const questions = useSelector((state) => state.main.questions);
+    
+    const addQuestion = () => {
+        dispatch(addQuestions(['Вопрос 1', 'Вопрос 2']));
+    }
+    
     return (
         <div className="App">
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. A accusamus alias aspernatur at culpa ducimus ea facere iste laborum maxime nesciunt non quia quisquam, quod ratione repudiandae sequi sint, sit.</p>
+            <button onClick={addQuestion}>Добавить вопросы</button>
+
+            { questions.map(question => {
+                return <p>{question}</p>
+            }) }
         </div>
     );
 }
