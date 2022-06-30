@@ -1,6 +1,7 @@
 import './App.scss';
 import {addQuestions} from "./store/slices/main";
 import {useDispatch, useSelector} from "react-redux";
+import {DefaultLayout} from "./layout/default";
 
 const App = () => {
     const dispatch = useDispatch();
@@ -17,6 +18,8 @@ const App = () => {
             { questions.map(question => {
                 return <p>{question}</p>
             }) }
+            
+            <DefaultLayout />
         </div>
     );
 }
