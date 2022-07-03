@@ -5,18 +5,18 @@ export const accounts = [
         id: 11122435,
         userId: 10000001055486,
         stockCount: 990000,
-        questions: generateQuestions(1, 2)
+        questions: generateQuestions({idFrom: 1, number: 2, numberOfCandidates: 2})
     },
     {
         id: 12122435,
         userId: 10000001055486,
         stockCount: 1230000,
-        questions: generateQuestions(7, 9, 3)
+        questions: generateQuestions({idFrom: 7, number: 9, answeredQuestions: 3, isCumulative: true})
     },
     {
         id: 12345678,
         userId: 10000001055486,
         stockCount: 1234567,
-        questions: generateQuestions(31, 3)
+        questions: generateQuestions({idFrom: 31, number: 3})
     }
 ];

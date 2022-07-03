@@ -9,7 +9,7 @@
  */
 import {answerTypes} from "../enum/answerTypes";
 
-export const generateQuestions = (idFrom, number, answeredQuestions = 0) => {
+export const generateQuestions = ({idFrom, number, answeredQuestions, numberOfCandidates, isCumulative}) => {
     const questions = [];
     
     for (let i = 0; i < number; i++) {
@@ -17,8 +17,11 @@ export const generateQuestions = (idFrom, number, answeredQuestions = 0) => {
             id: idFrom + i,
             title: 'Заголовок ' + idFrom + i,
             description: 'Основной текст вопроса ' + idFrom + i,
-            result: i < answeredQuestions ? _getRandomAnswer() : null,
-            answers: [
+            result: answeredQuestions && i < answeredQuestions ? _getRandomAnswer() : null,
+            numberOfCandidates: !isCumulative && i === number - 1,
+            isCumulative: isCumulative && i === number - 1,
+            stocksCount: isCumulative ? 999999 : null,
+            answers: !isCumulative ? [
                 {
                     id: 1,
                     type: answerTypes.confirmed
@@ -31,7 +34,25 @@ export const generateQuestions = (idFrom, number, answeredQuestions = 0) => {
                     id: 3,
                     type: answerTypes.abstained
                 }
-            ]
+            ] : null,
+            candidates: isCumulative ? [
+                {
+                    id: 1,
+                    votes: 10
+                },
+                {
+                    id: 2,
+                    votes: 20
+                },
+                {
+                    id: 3,
+                    votes: 30
+                },
+                {
+                    id: 4,
+                    votes: 40
+                }
+            ] : null
         })
     }
     
