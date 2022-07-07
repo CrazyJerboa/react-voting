@@ -2,6 +2,7 @@ import './App.scss';
 import {addQuestions} from "./store/slices/main";
 import {useDispatch, useSelector} from "react-redux";
 import {DefaultLayout} from "./layout/default";
+import {MainPage} from "./pages";
 
 const App = () => {
     const dispatch = useDispatch();
@@ -19,7 +20,9 @@ const App = () => {
                 return <p>{question}</p>
             }) }
             
-            <DefaultLayout />
+            <DefaultLayout>
+                <MainPage />
+            </DefaultLayout>
         </div>
     );
 }
