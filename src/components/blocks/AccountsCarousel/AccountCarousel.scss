@@ -18,6 +18,32 @@
       align-items: center;
       min-height: 250px;
     }
+    
+    &-nav {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      height: 36px;
+      
+      button {
+        border-radius: 50%;
+        background: $background-gray;
+        width: 16px;
+        height: 16px;
+        cursor: pointer;
+        transition: $transition-default;
+        
+        &:hover {
+          background: $background-gray-lighten;
+        }
+        
+        &.tns-nav-active {
+          background: $background-primary;
+          cursor: default;
+        }
+      }
+    }
   }
   
   .slide {

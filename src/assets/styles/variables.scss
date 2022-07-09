@@ -1,5 +1,7 @@
 $primary: #FDCD00;
+$secondary: #475DDB;
 $black: #000000;
+$white: #FFFFFF;
 $gray: #A5A2A2;
 $gray-lighten: #D9D9D9;
 $gray-lighten-mid: #E5E5E5;
@@ -8,12 +10,17 @@ $gray-darken: #C4C4C4;
 
 $text-gray: $gray;
 $text-main: $black;
+$text-white: $white;
+$text-primary: $primary;
+$text-secondary: $secondary;
 
 $border-primary: $primary;
 $border-black: $black;
 $border-gray: $gray-lighten-mid;
 
 $background-primary: $primary;
+$background-secondary: $secondary;
+$background-black: $black;
 $background-gray: $gray-lighten;
 $background-gray-darken: $gray-darken;
 $background-gray-lighten: $gray-lighten-max;

@@ -15,8 +15,8 @@ export const generateQuestions = ({idFrom, number, answeredQuestions, numberOfCa
     for (let i = 0; i < number; i++) {
         questions.push({
             id: idFrom + i,
-            title: 'Заголовок ' + idFrom + i,
-            description: 'Основной текст вопроса ' + idFrom + i,
+            title: 'Заголовок ' + (idFrom + i),
+            description: 'Основной текст вопроса ' + (idFrom + i),
             result: answeredQuestions && i < answeredQuestions ? _getRandomAnswer() : null,
             numberOfCandidates: !isCumulative && i === number - 1,
             isCumulative: isCumulative && i === number - 1,

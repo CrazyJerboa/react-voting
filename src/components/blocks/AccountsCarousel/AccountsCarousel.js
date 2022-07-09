@@ -1,21 +1,22 @@
-import {useEffect, useRef, useState} from "react";
+import {useEffect, useState} from "react";
 import TinySlider from "tiny-slider-react";
 import 'tiny-slider/dist/tiny-slider.css';
 import './AccountCarousel.scss';
 
 export const AccountsCarousel = ({slides, slideChanged}) => {
-    const [settings, setSettings] = useState({
+    const [settings] = useState({
         mouseDrag: true,
         gutter: 15,
         controls: false,
-        loop: false
+        loop: false,
+        nav: true,
+        navPosition: 'bottom'
     });
     const [currentSlide, setCurrentSlide] = useState(0);
-    const slider = useRef(null);
     
     useEffect(() => {
         slideChanged(currentSlide);
-    }, []);
+    }, [currentSlide, slideChanged]);
 
     const customizedFunction = e => {
         setCurrentSlide(e.index);
@@ -37,10 +38,9 @@ export const AccountsCarousel = ({slides, slideChanged}) => {
     return <div className="accountsCarousel">
         <TinySlider
             settings={settings}
-            ref={slider}
             onIndexChanged={customizedFunction}
         >
-            {slides.length && slides.map((slide, index) => <div className="slideOuter" key={index}>
+            {slides?.length && slides.map((slide, index) => <div className="slideOuter" key={index}>
                 <div className="slide">
                     <div className="slide__firstLine">
                         <div className="col-left">
