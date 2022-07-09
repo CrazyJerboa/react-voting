@@ -46,4 +46,17 @@ p {
   &:active {
     background: darken($background-primary, 10%);
   }
+  
+  &-gray {
+    background: $background-gray;
+    height: 36px;
+
+    &:hover {
+      background: lighten($background-gray, 5%);
+    }
+
+    &:active {
+      background: darken($background-gray, 10%);
+    }
+  }
 }
