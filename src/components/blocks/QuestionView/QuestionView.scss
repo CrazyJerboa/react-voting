@@ -6,6 +6,7 @@
   align-items: flex-start;
   background: $background-gray-lighten;
   padding: 20px 30px;
+  min-height: 405px;
   
   &Divider {
     background: $background-primary;
@@ -80,6 +81,7 @@
     align-items: center;
     justify-content: space-between;
     gap: 10px;
+    margin-bottom: auto;
     width: 100%;
     
     .divider {
