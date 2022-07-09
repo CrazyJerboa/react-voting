@@ -1,0 +1,21 @@
+$primary: #FDCD00;
+$black: #000000;
+$gray: #A5A2A2;
+$gray-lighten: #D9D9D9;
+$gray-lighten-mid: #E5E5E5;
+$gray-lighten-max: #F2F5F8;
+$gray-darken: #C4C4C4;
+
+$text-gray: $gray;
+$text-main: $black;
+
+$border-primary: $primary;
+$border-black: $black;
+$border-gray: $gray-lighten-mid;
+
+$background-primary: $primary;
+$background-gray: $gray-lighten;
+$background-gray-darken: $gray-darken;
+$background-gray-lighten: $gray-lighten-max;
+
+$transition-default: 0.3s;
