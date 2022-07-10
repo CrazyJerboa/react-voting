@@ -1,0 +1,75 @@
+@import "src/assets/styles/variables";
+
+.votingModal {
+  &__text {
+    display: flex;
+    flex-direction: column;
+    background: $background-gray-lighten;
+    padding: 15px;
+    min-height: 365px;
+    
+    &Inner {
+      margin-bottom: 10px;
+      font-size: 18px;
+    }
+    
+    &Buttons {
+      display: flex;
+      justify-content: space-between;
+      gap: 10px;
+      margin-top: auto;
+      
+      .btn {
+        &Translate {
+          width: 122px;
+          
+          input {
+            position: absolute;
+            opacity: 0;
+          }
+        }
+        
+        &ToggleText {
+          width: 36px;
+        }
+      }
+    }
+  }
+  
+  &__buttons {
+    margin-top: 15px;
+    padding: 15px 37px;
+    
+    .votingButtons {
+      margin-top: 20px;
+      
+      &:first-child {
+        margin-top: 0;
+      }
+    }
+  }
+  
+  &__confirm {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 55px;
+    
+    .button {
+      border-radius: 0 0 10px 0;
+      height: 70px;
+      width: 50%;
+      
+      &[disabled] {
+        background: $background-gray;
+        color: $text-gray;
+        cursor: default;
+      }
+    }
+  }
+  
+  &.multiple {
+    .votingModal__text {
+      min-height: 60px;
+    }
+  }
+}

@@ -1,0 +1,131 @@
+@import "src/assets/styles/variables";
+
+.cumulativeVoting {
+  .votingButtons {
+    flex-direction: row;
+    gap: 18px;
+    margin-bottom: 5px;
+    
+    .button {
+      width: calc(33.333333% - 9px);
+      height: 83px;
+      font-size: 0;
+      
+      svg {
+        display: none;
+      }
+      
+      &:not(.inactive),
+      &:not(.selected) {
+        background: transparent;
+        
+        &.btnConfirmed {
+          border: 3px solid $background-green;
+        }
+        
+        &.btnAbstained {
+          border: 3px solid $background-primary;
+        }
+        
+        &.btnDeclined {
+          border: 3px solid $background-red;
+        }
+      }
+      
+      &.inactive {
+        background: $background-gray-lighten;
+        border-color: $background-gray-lighten !important;
+      }
+      
+      &.selected {
+        &.btnConfirmed {
+          background: $background-green;
+        }
+
+        &.btnAbstained {
+          background: $background-primary;
+        }
+
+        &.btnDeclined {
+          background: $background-red;
+        }
+      }
+    }
+  }
+  
+  &__shares {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    border-radius: 10px;
+    background: $background-primary;
+    box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.25);
+    margin: 0 -23px 10px;
+    padding: 0 23px;
+    height: 56px;
+    
+    p {
+      margin: 0;
+      font-size: 18px;
+      font-weight: 700;
+    }
+  }
+  
+  &__candidate {
+    margin-bottom: 5px;
+    
+    &Name {
+      margin-bottom: 5px;
+      font-size: 18px;
+      font-weight: 700;
+    }
+    
+    &Inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 40px;
+
+      .input-range {
+        height: 40px;
+        
+        &__track {
+          height: 20px;
+          margin-top: -10px;
+          
+          &--active {
+            background: transparent;
+            margin: 0 !important;
+          }
+        }
+        
+        &__slider {
+          border: 0;
+          border-radius: 10px;
+          background: $background-primary;
+          margin-left: -20px;
+          margin-top: -30px;
+          width: 40px;
+          height: 40px;
+        }
+      }
+    }
+    
+    &Field {
+      border: 2px solid $border-gray;
+      border-radius: 10px;
+      outline: none;
+      padding: 0 0 0 15px;
+      width: 113px;
+      height: 50px;
+      font-size: 18px;
+      font-weight: 700;
+      transition: $transition-default;
+      
+      &:focus {
+        border-color: $border-primary;
+      }
+    }
+  }
+}

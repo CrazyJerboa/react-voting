@@ -1,0 +1,93 @@
+@import "src/assets/styles/variables";
+
+.questionView {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  background: $background-gray-lighten;
+  padding: 20px 30px;
+  min-height: 405px;
+  
+  &Divider {
+    background: $background-primary;
+    margin: 0 auto 20px;
+    width: 91.953%;
+    height: 4px;
+  }
+  
+  &__number {
+    font-size: 14px;
+    font-weight: 700;
+    color: $text-gray;
+  }
+  
+  &__title {
+    font-size: 17px;
+  }
+  
+  &__description {
+    font-size: 12px;
+    font-weight: 700;
+  }
+  
+  &__link {
+    border: 0;
+    border-radius: 0;
+    background: transparent;
+    padding: 0;
+    text-decoration: none;
+    font-size: 12px;
+    font-weight: 700;
+    color: $text-secondary;
+    cursor: pointer;
+    transition: $transition-default;
+    
+    .icon {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      top: -1px;
+      border-radius: 50%;
+      background: $background-secondary;
+      margin-right: 3px;
+      width: 13px;
+      height: 13px;
+      font-size: 10px;
+      font-weight: 700;
+      color: $text-white;
+      transition: inherit;
+    }
+    
+    &:hover {
+      color: lighten($text-secondary, 10%);
+      
+      .icon {
+        background: lighten($background-secondary, 10%);
+      }
+    }
+  }
+  
+  &__more {
+    margin-bottom: 10px;
+  }
+  
+  &__links {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    margin-bottom: auto;
+    width: 100%;
+    
+    .divider {
+      background: $background-black;
+      width: 1px;
+      height: 20px;
+    }
+  }
+  
+  &__voteBtn {
+    margin: 35px auto 0;
+  }
+}

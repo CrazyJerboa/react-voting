@@ -1,0 +1,133 @@
+@import "src/assets/styles/variables";
+
+#tns1 > .tns-item {
+  font-size: unset;
+}
+
+.accountsCarousel {
+  margin: 0 auto;
+  width: 85.176%;
+  
+  .tns {
+    &-ovh {
+      overflow: visible;
+    }
+    
+    &-slider {
+      display: flex;
+      align-items: center;
+      min-height: 250px;
+    }
+    
+    &-nav {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      height: 36px;
+      
+      button {
+        border-radius: 50%;
+        background: $background-gray;
+        width: 16px;
+        height: 16px;
+        cursor: pointer;
+        transition: $transition-default;
+        
+        &:hover {
+          background: $background-gray-lighten;
+        }
+        
+        &.tns-nav-active {
+          background: $background-primary;
+          cursor: default;
+        }
+      }
+    }
+  }
+  
+  .slide {
+    position: relative;
+    border: 3px solid $border-primary;
+    border-radius: 10px;
+    overflow: hidden;
+    padding: 5px 25px 5px 35px;
+    transition: padding $transition-default;
+    
+    &::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -9px;
+      background: $background-primary;
+      width: 9px;
+      height: 100%;
+      transition: left $transition-default;
+    }
+    
+    &__firstLine,
+    &__secondLine {
+      display: flex;
+      gap: 60px;
+      
+      .col {
+        &-left {
+          width: 65px;
+        }
+      }
+    }
+    
+    &__firstLine {
+      margin-bottom: 25px;
+      
+      .col-left {
+        display: flex;
+        flex-direction: column;
+
+        .divider {
+          border-top: 1px solid $border-black;
+          margin: auto 0 0;
+        }
+      }
+    }
+    
+    .avatar {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: $background-gray-darken;
+      border: 4px solid $border-gray;
+      border-radius: 10px;
+      overflow: hidden;
+      width: 65px;
+      height: 65px;
+      font-size: 16px;
+    }
+    
+    .label {
+      font-weight: 500;
+      color: $text-gray;
+    }
+    
+    .value {
+      margin-bottom: 15px;
+      font-weight: 600;
+    }
+    
+    &__secondLine {
+      .label {
+        margin-bottom: 17px;
+      }
+    }
+  }
+  
+  .tns-slide-active {
+    .slide {
+      padding: 25px 25px 25px 35px;
+
+      &::before {
+        left: 0;
+      }
+    }
+  }
+}

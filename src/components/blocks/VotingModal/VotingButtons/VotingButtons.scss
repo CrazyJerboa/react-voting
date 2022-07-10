@@ -1,0 +1,55 @@
+@import "src/assets/styles/variables";
+
+.votingButtons {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  
+  &__title {
+    font-size: 18px;
+    font-weight: 700;
+  }
+
+  .button {
+    justify-content: flex-start;
+    gap: 12px;
+    width: 100%;
+    height: 50px;
+    font-size: 18px;
+    font-weight: 700;
+    text-transform: uppercase;
+    color: $text-white;
+
+    &.btnConfirmed {
+      background: $background-green;
+
+      &:hover {
+        background: lighten($background-green, 10%);
+      }
+    }
+
+    &.btnAbstained {
+      background: $background-primary-darken;
+
+      &:hover {
+        background: lighten($background-primary-darken, 10%);
+      }
+    }
+
+    &.btnDeclined {
+      background: $background-red;
+
+      &:hover {
+        background: lighten($background-red, 10%);
+      }
+    }
+
+    &.inactive {
+      background: $background-gray;
+
+      &:hover {
+        background: lighten($background-gray, 10%);
+      }
+    }
+  }
+}
