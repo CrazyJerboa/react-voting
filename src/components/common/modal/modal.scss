@@ -13,7 +13,7 @@
   transition: $transition-default;
   
   .before {
-    position: absolute;
+    position: fixed;
     top: 0;
     left: 0;
     z-index: 5;
@@ -27,9 +27,9 @@
     z-index: 10;
     border-radius: 10px;
     background: $background-white;
-    overflow: hidden;
     margin: auto;
-    width: 100%;
+    width: 428px;
+    max-width: 100%;
   }
   
   &__title {
