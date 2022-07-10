@@ -1,17 +1,19 @@
 import './VotingModal.scss';
-import {useEffect, useRef, useState} from "react";
+import {useEffect, useState} from "react";
 
 import {VotingButtons} from "./VotingButtons/VotingButtons";
+import {CumulativeVoting} from "../CumulativeVoting/CumulativeVoting";
 
 const MAX_DESCRIPTION_LENGTH = 50;
 
-export const VotingModal = ({question, vote}) => {
+export const VotingModal = ({question, vote, sharesCount}) => {
     const [isDescriptionOpened, setDescriptionState] = useState(false);
     const [isEngTranslate, changeTranslationState] = useState(false);
     const [answer, setAnswer] = useState(null);
+    const [votes, setVotes] = useState([]);
     
     useEffect(() => {
-        if (question.numberOfCandidates && question.numberOfCandidates > 1) {
+        if (question.numberOfCandidates && question.numberOfCandidates > 1 && !question.isCumulative) {
             setAnswer(Array(question.numberOfCandidates).fill(null));
         }
     }, []);
@@ -46,6 +48,10 @@ export const VotingModal = ({question, vote}) => {
         }
     }
     
+    const updateVotes = votes => {
+        setVotes(votes);
+    }
+    
     const checkSubmitButton = () => {
         if (Array.isArray(answer)) {
             let nullCount = 0;
@@ -61,8 +67,39 @@ export const VotingModal = ({question, vote}) => {
 
         return !answer;
     }
+    
+    const getButtonsContent = () => {
+        if (question.numberOfCandidates && question.numberOfCandidates > 1) {
+            if (question.isCumulative) {
+                return <CumulativeVoting
+                    answer={answer}
+                    sharesCount={sharesCount}
+                    candidatesCount={question.numberOfCandidates}
+                    setAnswer={updateAnswers}
+                    setVotes={updateVotes}
+                />;
+            } else if (Array.isArray(answer)) {
+                return answer.map((_, index) => {
+                    return <VotingButtons
+                        key={index}
+                        title={'Кандидат номер ' + (index + 1)}
+                        index={index}
+                        answer={answer[index]}
+                        setAnswer={updateAnswers}
+                    />
+                });
+            }
+            
+            return null;
+        }
 
-    return <div className="votingModal">
+        return <VotingButtons
+            answer={answer}
+            setAnswer={updateAnswers}
+        />;
+    }
+
+    return <div className={'votingModal' + (question.numberOfCandidates && question.numberOfCandidates > 1 ? ' multiple' : '')}>
         <div className="votingModal__text">
             <div className="votingModal__textInner">
                 {getDescription()}
@@ -87,28 +124,13 @@ export const VotingModal = ({question, vote}) => {
         </div>
 
         <div className="votingModal__buttons">
-            {question.numberOfCandidates && question.numberOfCandidates > 1 && Array.isArray(answer) ?
-                answer.map((_, index) => {
-                    return <VotingButtons
-                        key={index}
-                        title={'Кандидат номер ' + (index + 1)}
-                        index={index}
-                        answer={answer[index]}
-                        setAnswer={updateAnswers}
-                    />
-                })
-                :
-                <VotingButtons
-                    answer={answer}
-                    setAnswer={updateAnswers}
-                />
-            }
+            {getButtonsContent()}
         </div>
         
         <div className="votingModal__confirm">
             <button
                 className="button"
-                onClick={() => vote(answer)}
+                onClick={() => vote(answer, votes)}
                 disabled={checkSubmitButton()}
             >Проголосовать</button>
         </div>

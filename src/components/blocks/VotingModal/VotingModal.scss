@@ -66,4 +66,10 @@
       }
     }
   }
+  
+  &.multiple {
+    .votingModal__text {
+      min-height: 60px;
+    }
+  }
 }

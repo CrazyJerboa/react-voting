@@ -19,7 +19,7 @@ const mainSlice = createSlice({
         },
 
         updateQuestionResults: (state, action) => {
-            const {accountId, questionId, result} = action.payload;
+            const {accountId, questionId, result, votes} = action.payload;
 
             state.accounts = [
                 ...state.accounts.map(account => {
@@ -27,6 +27,7 @@ const mainSlice = createSlice({
                         account.questions = account.questions.map(question => {
                             if (question.id === questionId) {
                                 question.result = result;
+                                question.votes = votes;
                             }
                             
                             return question;

@@ -67,7 +67,7 @@ export const AccountsCarousel = ({slides, slideChanged}) => {
                     <div className="slide__secondLine">
                         <div className="col-left">
                             <p className="label">Акции</p>
-                            <p className="value">{slide.stockCount}</p>
+                            <p className="value">{slide.sharesCount}</p>
                         </div>
 
                         <div className="col-right">

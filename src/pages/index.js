@@ -8,16 +8,20 @@ import Modal from "../components/common/modal/modal";
 import {clearModalName, setModalName, updateQuestionResults} from "../store/slices/main";
 import {VotingModal} from "../components/blocks/VotingModal/VotingModal";
 import {getNumber} from "../helpers/getNumberInText";
+import {answerTypes} from "../enum/answerTypes";
 
 export const MainPage = () => {
     const dispatch = useDispatch();
     const [question, setQuestion] = useState({});
     const [questionNumber, setQuestionNumber] = useState(0);
     const [isAllQuestionsAnswered, setAllQuestionsAnswered] = useState(false);
+    const [sharesCount, setSharesCount] = useState(0);
     const accounts = useSelector((state) => state.main.accounts);
     const openedModalName = useSelector(state => state.main.modalName);
 
     const getLastQuestions = (slideIndex) => {
+        setSharesCount(accounts[slideIndex]?.sharesCount)
+        
         if (accounts?.length) {
             const questions = accounts[slideIndex].questions;
             let questionIndex = 0;
@@ -37,11 +41,12 @@ export const MainPage = () => {
         }
     }
     
-    const vote = (result) => {
+    const vote = (result, votes = []) => {
         dispatch(updateQuestionResults({
             accountId: question.accountId,
             questionId: question.id,
-            result
+            result,
+            votes: result === answerTypes.confirmed ? votes : null
         }));
 
         dispatch(clearModalName());
@@ -73,6 +78,7 @@ export const MainPage = () => {
             >
                 <VotingModal
                     question={question}
+                    sharesCount={sharesCount}
                     vote={vote}
                 />
             </Modal>

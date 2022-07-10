@@ -5,11 +5,23 @@ import {ReactComponent as IconDecline} from "../../../../assets/icons/decline.sv
 import './VotingButtons.scss';
 
 export const VotingButtons = ({index, title, answer, setAnswer}) => {
+    const getClasses = (type) => {
+        let classes = '';
+        if (answer) {
+            if (answer !== type) {
+                classes += ' inactive';   
+            } else {
+                classes += ' selected';
+            }
+        }
+        return classes;
+    }
+    
     return <div className="votingButtons">
         {title && <p className="votingButtons__title">{title}</p>}
         
         <button
-            className={'button btnConfirmed' + (answer && answer !== answerTypes.confirmed ? ' inactive' : '')}
+            className={'button btnConfirmed' + getClasses(answerTypes.confirmed)}
             onClick={() => setAnswer(answerTypes.confirmed, index)}
         >
             <IconCheck />
@@ -17,7 +29,7 @@ export const VotingButtons = ({index, title, answer, setAnswer}) => {
         </button>
 
         <button
-            className={'button btnAbstained' + (answer && answer !== answerTypes.abstained ? ' inactive' : '')}
+            className={'button btnAbstained' + getClasses(answerTypes.abstained)}
             onClick={() => setAnswer(answerTypes.abstained, index)}
         >
             <IconPause />
@@ -25,7 +37,7 @@ export const VotingButtons = ({index, title, answer, setAnswer}) => {
         </button>
 
         <button
-            className={'button btnDeclined' + (answer && answer !== answerTypes.declined ? ' inactive' : '')}
+            className={'button btnDeclined' + getClasses(answerTypes.declined)}
             onClick={() => setAnswer(answerTypes.declined, index)}
         >
             <IconDecline />
