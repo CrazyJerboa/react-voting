@@ -59,4 +59,10 @@ p {
       background: darken($background-gray, 10%);
     }
   }
+  
+  &[disabled] {
+    background: $background-gray;
+    color: $text-gray;
+    cursor: default;
+  }
 }

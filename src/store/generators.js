@@ -22,7 +22,7 @@ export const generateQuestions = ({idFrom, number, answeredQuestions, numberOfCa
             description: i === 0 ? lorem : 'Основной текст вопроса ' + (idFrom + i),
             description_en: i === 0 ? 'English version of text. ' + lorem : 'English version of text. Основной текст вопроса ' + (idFrom + i),
             result: answeredQuestions && i < answeredQuestions ? _getRandomAnswer() : null,
-            numberOfCandidates: !isCumulative && i === number - 1,
+            numberOfCandidates: !isCumulative && i === number - 1 ? numberOfCandidates : null,
             isCumulative: isCumulative && i === number - 1,
             stocksCount: isCumulative ? 999999 : null,
             answers: !isCumulative ? [

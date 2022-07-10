@@ -5,7 +5,7 @@ import {QuestionView} from "../components/blocks/QuestionView/QuestionView";
 import React from ".";
 import ModalPortal from "../components/portals/modalPortal/modalPortal";
 import Modal from "../components/common/modal/modal";
-import {setModalName, updateQuestionResults} from "../store/slices/main";
+import {clearModalName, setModalName, updateQuestionResults} from "../store/slices/main";
 import {VotingModal} from "../components/blocks/VotingModal/VotingModal";
 import {getNumber} from "../helpers/getNumberInText";
 
@@ -13,6 +13,7 @@ export const MainPage = () => {
     const dispatch = useDispatch();
     const [question, setQuestion] = useState({});
     const [questionNumber, setQuestionNumber] = useState(0);
+    const [isAllQuestionsAnswered, setAllQuestionsAnswered] = useState(false);
     const accounts = useSelector((state) => state.main.accounts);
     const openedModalName = useSelector(state => state.main.modalName);
 
@@ -29,8 +30,10 @@ export const MainPage = () => {
                 return !question.result;
             });
 
+            setAllQuestionsAnswered(!question);
+            
             setQuestion(question ? question : questions[questions.length - 1]);
-            setQuestionNumber(questionIndex + 1);
+            setQuestionNumber(question ? questionIndex + 1 : questions.length);
         }
     }
     
@@ -40,6 +43,8 @@ export const MainPage = () => {
             questionId: question.id,
             result
         }));
+
+        dispatch(clearModalName());
     }
 
     const showModal = () => {
@@ -57,6 +62,7 @@ export const MainPage = () => {
                 question={question}
                 questionNumber={questionNumber}
                 showModal={showModal}
+                isBtnDisabled={isAllQuestionsAnswered}
             />
         }
 

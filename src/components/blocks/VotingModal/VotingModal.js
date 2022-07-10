@@ -1,10 +1,7 @@
 import './VotingModal.scss';
-import {useState} from "react";
+import {useEffect, useRef, useState} from "react";
 
-import {ReactComponent as IconCheck} from '../../../assets/icons/check.svg';
-import {ReactComponent as IconPause} from '../../../assets/icons/pause.svg';
-import {ReactComponent as IconDecline} from '../../../assets/icons/decline.svg';
-import {answerTypes} from "../../../enum/answerTypes";
+import {VotingButtons} from "./VotingButtons/VotingButtons";
 
 const MAX_DESCRIPTION_LENGTH = 50;
 
@@ -12,6 +9,12 @@ export const VotingModal = ({question, vote}) => {
     const [isDescriptionOpened, setDescriptionState] = useState(false);
     const [isEngTranslate, changeTranslationState] = useState(false);
     const [answer, setAnswer] = useState(null);
+    
+    useEffect(() => {
+        if (question.numberOfCandidates && question.numberOfCandidates > 1) {
+            setAnswer(Array(question.numberOfCandidates).fill(null));
+        }
+    }, []);
     
     const toggleDescription = () => {
         setDescriptionState(!isDescriptionOpened);
@@ -24,6 +27,7 @@ export const VotingModal = ({question, vote}) => {
     const getDescription = () => {
         const description = isEngTranslate ? question.description_en : question.description;
         let str = description ? description.slice(0, MAX_DESCRIPTION_LENGTH) : '';
+        
         if (description?.length > str.length) {
             str += '...';
         }
@@ -31,6 +35,33 @@ export const VotingModal = ({question, vote}) => {
         return isDescriptionOpened ? description : str;
     }
     
+    const updateAnswers = (newAnswer, index) => {
+        if (typeof index === 'number') {
+            const answers = answer;
+            
+            answers[index] = newAnswer;
+            setAnswer([...answers]);
+        } else {
+            setAnswer(newAnswer);
+        }
+    }
+    
+    const checkSubmitButton = () => {
+        if (Array.isArray(answer)) {
+            let nullCount = 0;
+            
+            answer.forEach(r => {
+                if (!r) {
+                    nullCount++;
+                }
+            })
+            
+            return nullCount > 0;
+        }
+
+        return !answer;
+    }
+
     return <div className="votingModal">
         <div className="votingModal__text">
             <div className="votingModal__textInner">
@@ -56,36 +87,29 @@ export const VotingModal = ({question, vote}) => {
         </div>
 
         <div className="votingModal__buttons">
-            <button
-                className={'button btnConfirmed' + (answer && answer !== answerTypes.confirmed ? ' inactive' : '')}
-                onClick={() => setAnswer(answerTypes.confirmed)}
-            >
-                <IconCheck />
-                За
-            </button>
-            
-            <button
-                className={'button btnAbstained' + (answer && answer !== answerTypes.abstained ? ' inactive' : '')}
-                onClick={() => setAnswer(answerTypes.abstained)}
-            >
-                <IconPause />
-                Воздержался
-            </button>
-            
-            <button
-                className={'button btnDeclined' + (answer && answer !== answerTypes.declined ? ' inactive' : '')}
-                onClick={() => setAnswer(answerTypes.declined)}
-            >
-                <IconDecline />
-                Против
-            </button>
+            {question.numberOfCandidates && question.numberOfCandidates > 1 && Array.isArray(answer) ?
+                answer.map((_, index) => {
+                    return <VotingButtons
+                        key={index}
+                        title={'Кандидат номер ' + (index + 1)}
+                        index={index}
+                        answer={answer[index]}
+                        setAnswer={updateAnswers}
+                    />
+                })
+                :
+                <VotingButtons
+                    answer={answer}
+                    setAnswer={updateAnswers}
+                />
+            }
         </div>
         
         <div className="votingModal__confirm">
             <button
                 className="button"
                 onClick={() => vote(answer)}
-                disabled={!answer}
+                disabled={checkSubmitButton()}
             >Проголосовать</button>
         </div>
     </div>;

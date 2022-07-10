@@ -3,7 +3,7 @@ import {getNumber} from "../../../helpers/getNumberInText";
 
 const MAX_DESCRIPTION_LENGTH = 30;
 
-export const QuestionView = ({question, questionNumber, showModal}) => {
+export const QuestionView = ({question, questionNumber, showModal, isBtnDisabled}) => {
     const getDescription = () => {
         let str = question.description ? question.description.slice(0, MAX_DESCRIPTION_LENGTH) : '';
         if (question.description?.length > str.length) {
@@ -39,6 +39,7 @@ export const QuestionView = ({question, questionNumber, showModal}) => {
             <button
                 className="questionView__voteBtn button"
                 onClick={showModal}
+                disabled={isBtnDisabled}
             >Проголосовать</button>
         </div>
     </>;
